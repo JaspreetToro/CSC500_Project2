@@ -7,7 +7,6 @@ public class SDN {
 	static HashMap<Integer, String> PodMap = new HashMap<Integer, String>();
 	static HashMap<Integer, String> TopoMap = new HashMap<Integer, String>();
 
-
 	public static int ShorestDistance(int k,int j,int i) {		
 
 		return NumberOfHops(k,j,i);
