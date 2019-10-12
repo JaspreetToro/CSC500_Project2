@@ -10,30 +10,9 @@ public class SDN {
 	public static int ShorestDistance(int k,int j,int i) {		
 
 		return NumberOfHops(k,j,i);
-	}
+	}	
 
-	private static HashMap<Integer, String> CreatePodMap(int k) {
-
-		HashMap<Integer, String> podMap = new HashMap<Integer, String>();
-
-		//assign map
-		//assign Pod 
-		for(int i = 0; i < k; i++){
-			podMap.put(i, "Pod");
-		}
-
-		return podMap;
-	}
-
-	public static boolean tryParseInt(String value) {  
-		try {  
-			Integer.parseInt(value);  
-			return true;  
-		} catch (NumberFormatException e) {  
-			return false;  
-		}  
-	}
-
+	@SuppressWarnings("unused")
 	private static int NumberOfHops( int k,int i,int j) 
 	{
 		int hops;//for now so we wont get a error later we wont initialize
@@ -164,6 +143,41 @@ public class SDN {
 		return hops;
 	}
 
+	public static boolean tryParseInt(String value) {  
+		try {  
+			Integer.parseInt(value);  
+			return true;  
+		} catch (NumberFormatException e) {  
+			return false;  
+		}  
+	}
+	
+	public static String typeOf(int k, int id) {
+		String type;
+
+		if (id >= 0 && id <= (Math.pow(k, 3)/4) - 1)
+		{
+			type ="Physical Machine";
+
+		}
+		else if(id >= Math.pow(k, 3)/4 & id <= Math.pow(k, 3)/4 + Math.pow(k, 2)/2 - 1)
+		{
+			type ="Edge Switch";
+		}
+		else if (id >= Math.pow(k, 3)/4 + Math.pow(k, 2)/2 & id <= Math.pow(k, 3)/4 + Math.pow(k, 2)/2 + Math.pow(k, 2)/2 - 1 )
+		{
+			type ="Aggregation Switch";
+		}
+		else //if 
+		{
+			type ="Core Switch";
+		}
+		return type;
+	}
+	
+//----------------------------------Methods I dont think we will use for project 2--------------------------
+	
+	@SuppressWarnings("unused")
 	private static HashMap<Integer, String> CreateTopology(int k) {
 		//initialize map and variables needed
 		HashMap<Integer, String> map = new HashMap<Integer, String>();
@@ -206,9 +220,24 @@ public class SDN {
 
 		return map;		
 	}
+	
+	@SuppressWarnings("unused")
+	private static HashMap<Integer, String> CreatePodMap(int k) {
 
+		HashMap<Integer, String> podMap = new HashMap<Integer, String>();
+
+		//assign map
+		//assign Pod 
+		for(int i = 0; i < k; i++){
+			podMap.put(i, "Pod");
+		}
+
+		return podMap;
+	}
+	
+	@SuppressWarnings("unused")
 	private static void PrintMap(Map<Integer, String> topoMap, boolean isPodMap) {
-
+		
 		String title = "";
 		if(isPodMap) {
 			title = "\n--------------------------------Pod------------------------------------";
@@ -216,37 +245,14 @@ public class SDN {
 		else {      
 			title = "\n------------------------Pm and all Switches----------------------------";
 		}
-
+		
 		System.out.println(title);
-
+		
 		for(Map.Entry<Integer, String> entry : topoMap.entrySet()) {
 			System.out.println(entry.getValue() + "Id: " + entry.getKey());
 		}
-
+		
 		System.out.println("-----------------------------------------------------------------------");
-	}
-
-	public static String typeOf(int k, int id) {
-		String type;
-
-		if (id >= 0 && id <= (Math.pow(k, 3)/4) - 1)
-		{
-			type ="Physical Machine";
-
-		}
-		else if(id >= Math.pow(k, 3)/4 & id <= Math.pow(k, 3)/4 + Math.pow(k, 2)/2 - 1)
-		{
-			type ="Edge Switch";
-		}
-		else if (id >= Math.pow(k, 3)/4 + Math.pow(k, 2)/2 & id <= Math.pow(k, 3)/4 + Math.pow(k, 2)/2 + Math.pow(k, 2)/2 - 1 )
-		{
-			type ="Aggregation Switch";
-		}
-		else //if 
-		{
-			type ="Core Switch";
-		}
-		return type;
 	}
 }
 
