@@ -1,6 +1,7 @@
 package Project2;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class SDN {
 
@@ -12,8 +13,70 @@ public class SDN {
 		return NumberOfHops(k,j,i);
 	}	
 
+	public static int[] GetInput() {
+		boolean procceed = false;
+		String temp;
+		int input = -1;
+		Scanner in = new Scanner(System.in);
+		int[] inputs = new int[6];
+
+		while(!procceed){
+			System.out.println("Hello enter k please.");
+
+			temp = in.nextLine();
+
+			procceed = tryParseInt(temp);
+
+			if(procceed) {
+				input = Integer.parseInt(temp);
+				if(input % 2 == 0 && input > 0)
+					procceed = true;
+				else {
+					System.out.println("Error: Must be an even number greater than 0.");			
+					procceed = false;
+				}
+			}
+			else
+			{
+				System.out.println("Error: Must be an even number greater than 0.");	
+			}
+		}		
+		inputs[0] = input;
+
+		PodMap = CreatePodMap(inputs[0]);
+		TopoMap = CreateTopology(inputs[0]);
+
+		PrintMap(PodMap, true);
+		PrintMap(TopoMap, false);	
+
+		int total = (int) (((5 * Math.pow(inputs[0], 2))+(Math.pow(inputs[0], 3)))/4);
+
+		// input for l
+		System.out.println("Please enter the number of VM pairs randomly placed. For example 1 = 2 VMs. \nMust be between 1 and " + total/2);
+		inputs[1] = in.nextInt();	
+
+		// input for m
+		System.out.println("Please enter the number of middleboxes in the data center.");
+		inputs[2] = in.nextInt();	
+		
+		// input for rc
+		System.out.println("Please enter the initial capacity of each PM.");
+		inputs[3] = in.nextInt();	
+
+		// input for lambda
+		System.out.println("Please enter the communication frequency of each VM pair is a random number between [0, lambda].");
+		inputs[4] = in.nextInt();	
+		
+		// input for migration
+		System.out.println("Please enter the migration coefficient.");
+		inputs[5] = in.nextInt();		
+
+		in.close();
+		return inputs;
+	}
+	
 	@SuppressWarnings("unused")
-	private static int NumberOfHops( int k,int i,int j) 
+	private static int NumberOfHops( int k,int i,int j)
 	{
 		int hops;//for now so we wont get a error later we wont initialize
 		int start = 0;
