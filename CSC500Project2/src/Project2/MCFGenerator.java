@@ -10,7 +10,7 @@ public class MCFGenerator {
 	lambda: the communication frequency of each VM pair is a random number between [0, lambda]
 	mu: migration coefficient
 	*/
-	public static void GenerateFile(int k,int l,int m,int rc,int lambda, int migration) {	
+	public static void GenerateFile(int minCost) {	
 		
 	}
 }
