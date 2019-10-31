@@ -171,8 +171,6 @@ public class MinCost {
 		int numPms = (int)Math.pow(k, 3)/4;
 		List<Integer> list = new ArrayList<Integer>();
 
-		Random r = new Random();
-		
 		for(int i = 0;i < vmPairs * 2;i++) {
 
 				int result = r.nextInt(numPms-0) + 0;
